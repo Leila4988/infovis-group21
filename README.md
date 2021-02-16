@@ -3,3 +3,40 @@ Assignments for Information Visualization
 
 
 W2 Progress
+
+Choose sub-data set, Main Impressionists (12 artists ), from omniart_v3_datadump.csv
+
+Name + No. of artworks in the set:
+frederic bazille 48
+gustave caillebotte 230
+mary cassatt 434
+paul cezanne 620
+edgar degas 898
+armand guillaumin 75
+edouard manet 344 / édouard manet 99
+claude monet 1576
+berthe morisot 263
+camille pissarro 1025
+pierre-auguste renoir 1462 / auguste renoir 46
+alfred sisley 523
+
+Example painting for wireframes:
+c4e07e03-b9ba-4f69-a1c1-2f253fb36b27
+Madame Thurneyssen
+1908
+https://uploads6.wikiart.org/images/pierre-auguste-renoir/madame-thurneyssen-1908.jpg
+#783d12
+[u'#d6d5c5', u'#cda77f', u'#a2a596', u'#783d12', u'#c5baa7', u'#ad8654', u'#955819', u'#717a55', u'#645c36', u'#49562c', u'#404623', u'#2f2815']
+[3901, 4277, 6157, 7011, 4736, 5077, 6546, 6146, 4747, 4586, 6629, 5723]
+
+To-do
+
+1. Additional filtering
+- Painting only since it is about colours (exclude drawing and others)
+
+2. Data cleaning
+- Different names from the same artist (e.g. Pierre-Auguste Renoir 1462 / Auguste Renoir)
+
+3. What to do with artist has 2000 paintings or 100 paintings
+- Are we going to show limited number per year?
+- Are we going to use a different visualisation?
