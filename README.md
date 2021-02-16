@@ -29,6 +29,12 @@ https://uploads6.wikiart.org/images/pierre-auguste-renoir/madame-thurneyssen-190
 [u'#d6d5c5', u'#cda77f', u'#a2a596', u'#783d12', u'#c5baa7', u'#ad8654', u'#955819', u'#717a55', u'#645c36', u'#49562c', u'#404623', u'#2f2815']
 [3901, 4277, 6157, 7011, 4736, 5077, 6546, 6146, 4747, 4586, 6629, 5723]
 
+
+Wireframe V1: https://www.figma.com/file/wo37AXvqEteVxUUbm3Bueh/InfoVis?node-id=0%3A1
+
+
+
+
 To-do
 
 1. Additional filtering
