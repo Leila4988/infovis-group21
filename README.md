@@ -1,11 +1,14 @@
 # infovis-group21
-Assignments for Information Visualization
+Practical Project for Information Visualization
 
+## Week2
+### Meeting
+#### 1. Create a github repo
+#### 2. Finish a concrete design for the final project
 
-W2 Progress
+### Progress
 
-Choose sub-data set, Main Impressionists (12 artists ), from omniart_v3_datadump.csv
-
+#### 1.Choose sub-data set, Main Impressionists (12 artists ), from omniart_v3_datadump.csv
 Name + No. of artworks in the set:
 frederic bazille 48
 gustave caillebotte 230
@@ -20,7 +23,7 @@ camille pissarro 1025
 pierre-auguste renoir 1462 / auguste renoir 46
 alfred sisley 523
 
-Example painting for wireframes:
+#### 2.Example painting for wireframes:
 c4e07e03-b9ba-4f69-a1c1-2f253fb36b27
 Madame Thurneyssen
 1908
@@ -30,19 +33,16 @@ https://uploads6.wikiart.org/images/pierre-auguste-renoir/madame-thurneyssen-190
 [3901, 4277, 6157, 7011, 4736, 5077, 6546, 6146, 4747, 4586, 6629, 5723]
 
 
-Wireframe V1: https://www.figma.com/file/wo37AXvqEteVxUUbm3Bueh/InfoVis?node-id=0%3A1
+#### 3.Wireframe Result
+Version1: https://www.figma.com/file/wo37AXvqEteVxUUbm3Bueh/InfoVis?node-id=0%3A1
 
-
-
-
-To-do
-
-1. Additional filtering
+### To-dos
+#### 1. Additional filtering
 - Painting only since it is about colours (exclude drawing and others)
 
-2. Data cleaning
+#### 2. Data cleaning
 - Different names from the same artist (e.g. Pierre-Auguste Renoir 1462 / Auguste Renoir)
 
-3. What to do with artist has 2000 paintings or 100 paintings
+#### 3. What to do with artist has 2000 paintings or 100 paintings
 - Are we going to show limited number per year?
 - Are we going to use a different visualisation?
