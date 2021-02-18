@@ -21,13 +21,14 @@ pierre-auguste renoir 1462 / auguste renoir 46
 alfred sisley 523  
 
 #### 2.Example painting for wireframing:
-c4e07e03-b9ba-4f69-a1c1-2f253fb36b27  
-Madame Thurneyssen  
-1908  
-https://uploads6.wikiart.org/images/pierre-auguste-renoir/madame-thurneyssen-1908.jpg  
-#783d12  
-[u'#d6d5c5', u'#cda77f', u'#a2a596', u'#783d12', u'#c5baa7', u'#ad8654', u'#955819', u'#717a55', u'#645c36', u'#49562c', u'#404623', u'#2f2815']  
-[3901, 4277, 6157, 7011, 4736, 5077, 6546, 6146, 4747, 4586, 6629, 5723]  
+id: c4e07e03-b9ba-4f69-a1c1-2f253fb36b27  
+artwork_name: Madame Thurneyssen  
+creation_year: 1908  
+artist_full_name: pierre-auguste renoir  
+image_url: https://uploads6.wikiart.org/images/pierre-auguste-renoir/madame-thurneyssen-1908.jpg  
+dominant_color: #783d12  
+color_pallete: [u'#d6d5c5', u'#cda77f', u'#a2a596', u'#783d12', u'#c5baa7', u'#ad8654', u'#955819', u'#717a55', u'#645c36', u'#49562c', u'#404623', u'#2f2815']  
+palette_count: [3901, 4277, 6157, 7011, 4736, 5077, 6546, 6146, 4747, 4586, 6629, 5723]  
 
 
 #### 3.Wireframe Result
@@ -42,7 +43,7 @@ Version1: https://www.figma.com/file/wo37AXvqEteVxUUbm3Bueh/InfoVis?node-id=0%3A
 
 #### 3. What to do with artist has 2000 paintings or 100 paintings
 - Are we going to show limited number per year?
-- Are we going to use a different visualisation?
+- Are we going to use a different visualisation? (This approach)
 
 
 ## Week 3
