@@ -20,7 +20,7 @@ camille pissarro 1025
 pierre-auguste renoir 1462 / auguste renoir 46  
 alfred sisley 523  
 
-#### 2.Example painting for wireframes:
+#### 2.Example painting for wireframing:
 c4e07e03-b9ba-4f69-a1c1-2f253fb36b27  
 Madame Thurneyssen  
 1908  
