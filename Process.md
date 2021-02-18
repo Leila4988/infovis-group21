@@ -50,22 +50,26 @@ Version1: https://www.figma.com/file/wo37AXvqEteVxUUbm3Bueh/InfoVis?node-id=0%3A
 #### 1. Start work on the project based on figma concept
 #### 2. Clean and process dataset
 
+
 ### UI To-dos
 #### 1.Update the wireframe with new visualisation for artist artwork timeline
+
 
 ### Frontend To-dos
 #### 1. Set up framework for the project
 #### 2. Build components with D3
 #### 3. Connect components with testing data
 
+
 ### Backend To-dos
 #### 1. Filter data
 - Main Impressionists (12 artists )
 - Group artist work under different naming formats
 - Paintings only
-#### 1. Classify artworks by color
+#### 2. Classify artworks by color
 - Classfiy artist's artworks by dominate color 
 - Find most used color category per artist
 - Find most used color category per artist per year
+
 
 ### Progress
