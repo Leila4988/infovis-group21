@@ -1,4 +1,4 @@
-## Week2
+## Week 2
 ### Meeting with TA (11/02/2021)
 #### 1. Create a github repo
 #### 2. Finish a concrete design for the final project
@@ -45,7 +45,7 @@ Version1: https://www.figma.com/file/wo37AXvqEteVxUUbm3Bueh/InfoVis?node-id=0%3A
 - Are we going to use a different visualisation?
 
 
-## Week2
+## Week 3
 ### Meeting with TA (18/02/2021)
 #### 1. Start work on the project based on figma concept
 #### 2. Clean and process dataset
