@@ -23,6 +23,7 @@ alfred sisley 523
 #### 2.Example painting for wireframing:
 id: c4e07e03-b9ba-4f69-a1c1-2f253fb36b27  
 artwork_name: Madame Thurneyssen  
+artwork_type: painting  
 creation_year: 1908  
 artist_full_name: pierre-auguste renoir  
 image_url: https://uploads6.wikiart.org/images/pierre-auguste-renoir/madame-thurneyssen-1908.jpg  
@@ -64,9 +65,9 @@ Version1: https://www.figma.com/file/wo37AXvqEteVxUUbm3Bueh/InfoVis?node-id=0%3A
 
 ### Backend To-dos
 #### 1. Filter data
-- Main Impressionists (12 artists )
-- Group artist work under different naming formats
-- Paintings only
+- Main Impressionists (12 artists)
+- Group artist's work under different naming formats
+- Paintings only (artwork_type + general_type)
 #### 2. Classify artworks by color
 - Classfiy artist's artworks by dominate color 
 - Find most used color category per artist
