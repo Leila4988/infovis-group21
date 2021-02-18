@@ -1,4 +1,4 @@
 # infovis-group21
 Practical Project for Information Visualization
 
-# OnmiArt Colours: Main Impressionists 
+# OmniArt Colours: Main Impressionists 
