@@ -1,6 +1,6 @@
-# InfoVis Assignment #
+# OmniArt-Framework #
 
-This repo contains the first assignment for the course Information Visualization. Students need to create one visualization using html/js/d3 and one visualization using the python package Bokeh.
+This repo contains the project assignment for the course Information Visualization. 
 
 ## Requirements ##
 
