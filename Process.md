@@ -74,4 +74,7 @@ Version1: https://www.figma.com/file/wo37AXvqEteVxUUbm3Bueh/InfoVis?node-id=0%3A
 - Find most used color category per artist per year
 
 
-### Progress
+### Frontend Progress
+#### 1. Set up framework for the project
+#### 2. Build timeline and artist-color components with D3
+#### 3. Define data interfaces

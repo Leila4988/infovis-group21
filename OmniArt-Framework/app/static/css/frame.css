@@ -1,0 +1,48 @@
+
+body {
+	background-color: #F9FAFC;
+
+
+}
+
+.box {
+    background-color: #FFF;
+    border: 1px solid #EEE;
+    border-radius: 4px;
+}
+
+
+.box1 {
+	min-height: 320px;
+}
+
+.box2 {
+	min-height: 376px;
+}
+
+.box3 {
+	min-height: 720px;
+}
+
+.grid line {
+    stroke: lightgrey;
+    stroke-opacity: 0.7;
+    shape-rendering: crispEdges;
+    visibility: visible;
+  }
+  
+.grid path {
+    stroke-width: 0;
+}
+
+.xAxis .tick line{
+    visibility:hidden;
+}
+
+text{
+    fill:gray;
+}
+
+.yAxis .tick line{
+    visibility:hidden;
+}
