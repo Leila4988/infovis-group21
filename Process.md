@@ -78,3 +78,21 @@ Version1: https://www.figma.com/file/wo37AXvqEteVxUUbm3Bueh/InfoVis?node-id=0%3A
 #### 1. Set up framework for the project
 #### 2. Build timeline and artist-color components with D3
 #### 3. Define data interfaces
+
+
+## Week 3
+### Meeting with TA (25/02/2021)
+#### 1. Continue developing the current features
+#### 2. Add a new component based on a user story
+
+### To-dos
+#### 1.Create a user story
+
+Simon is an art historian who wants to research on colour usage influenced by paint production during Industrialisation. One of the main invention of this period is the collapsible tin paint tube. It not only offers a range of pre-mixed colours but also is portable. The painters do not need to grind pigments and mix their colours anymore. Simon wants to have more statistically on how this factor influenced the artists during that. He expects to see more usage of colours in the nature because the artists can now work on oil painting in outdoor environment instead of the studios. He also wants to see whether some pre-mixed colours’ usage increase significantly due to the convenience.
+
+References
+http://www.webexhibits.org/pigments/intro/industrialization.html
+
+#### 2.Update the wireframe with new visualisation for the user story
+#### 3.Finish the frontend of previous features
+#### 4.Connect features to the backend
