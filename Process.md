@@ -80,7 +80,7 @@ Version1: https://www.figma.com/file/wo37AXvqEteVxUUbm3Bueh/InfoVis?node-id=0%3A
 #### 3. Define data interfaces
 
 
-## Week 3
+## Week 4
 ### Meeting with TA (25/02/2021)
 #### 1. Continue developing the current features
 #### 2. Add a new component based on a user story
