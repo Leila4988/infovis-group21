@@ -61,11 +61,11 @@ function plot() {
                 .attr("fill", function (d) { return d.color })
                 .attr("width", function (d) { return x(d.endYear)-x(d.startYear); })
                 .attr("height", y.bandwidth() / 3)
-                .attr("rx", 15)
-                .attr("ry", 20)
+                .attr("rx", 10)
+                .attr("ry", 15)
                 .on("click", function (d, i) {
                     var artist_name = d.artist;
-                    plot_year(artist_name)
+                    plot_year(artist_name,d.startYear,d.endYear,d.fullname)
                 })
 
             // add the X Axis

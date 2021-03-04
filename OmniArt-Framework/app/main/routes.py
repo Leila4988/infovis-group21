@@ -146,6 +146,27 @@ def color_data():
 
 	return plot_data
 
+@main.route('/artwork_data', methods = ['GET'])
+def artwork_data():
+	id = int(request.args.get("id"))
+	plot_data = data.artwork_data.loc[(data.artwork_data['artwork_id'] == id)]
+	names = []
+	parents = []
+	values = []
+	colors = []
+	for index, row in plot_data.iterrows():
+		names.append("child" + str(index))
+		parents.append(str(row['artwork_id']))
+		values.append(row['palette_count'])
+		colors.append(row['color_pallete'])
+	newdata = {'name': Series(names), 'parent': Series(parents), 'value': Series(values), 'color': Series(colors)}
+	df = DataFrame(newdata)
+	insertRow = pd.DataFrame([[str(id),'','','']],columns = ['name','parent','value','color'])
+	newData = pd.concat([insertRow,df],ignore_index = True)
+	plot_data = newData.to_json(orient='records')
+
+	return plot_data
+
 
 
 

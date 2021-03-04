@@ -18,6 +18,7 @@
 	<link rel="stylesheet" type="text/css" href="../static/css/frame.css">
 	<script type="text/javascript" src="../static/js/artist.js"></script>
 	<script type="text/javascript" src="../static/js/color.js"></script>
+	<script type="text/javascript" src="../static/js/treemap.js"></script>
 
 	<style>
 		p,
@@ -37,20 +38,23 @@
 		<div class="row pt-3 m-2">
 			<div class="col-lg-7 col-12 ">
 				<div class="row box p-3 mt-4 box1" id="artistBarchart">
-					All artists
+					Main Impressionists
 				</div>
-				<div class="row box p-3 mt-4 box2" id="colorBarchart">Pierre-Auguste Renoir (1841–1919)
+				<div class="row box p-3 mt-4 box2" id="colorBarchart">
+					<p id="artist_year_name"> </p>
 				</div>
 			</div>
 			<div class="col-lg-5 col-12">
-				<div class="row box mt-4 ml-2 p-3 box3">
-					Madame Thurneyssen, 1908
+				<div class="row box mt-4 ml-2 p-3 box3" id="artworkTreemap">
+					<p id="artwork_name"> </p>
+					<div class="img-box">
+						<img id="artwork_img">
+					</div>
 				</div>
 			</div>
 		</div>
 	</div>
 	<script type="text/javascript">
-
 		//artistBarchart-begin
 		var margin = { top: 20, right: 20, bottom: 30, left: 35 },
 			artist_width = document.getElementById('artistBarchart').clientWidth,
@@ -99,7 +103,51 @@
 
 		// plot_blocks("Pissarro", 1850);
 
-	//artistBarchart-end
+		//artistBarchart-end
+
+		// treemap
+		var treemap_margin = { top: 10, right: 50, bottom: 10, left: 60 },
+			treemap_width = document.getElementById('artworkTreemap').clientWidth - 150,
+			treemap_height = document.getElementById('artworkTreemap').clientHeight / 2 - 50;
+
+		var treemapSvg = d3.select("#artworkTreemap").append("svg")
+			.attr("id", "treeMap")
+			.attr("height", treemap_height)
+			.attr("width", treemap_width)
+			.attr("transform", "translate(" + treemap_margin.left + "," + treemap_margin.top + ")");;
+
+
+		//load picture
+		function getImageFileFromUrl(url, imageName, callback) {
+			// imageName一定要带上后缀
+			var blob = null;
+			var xhr = new XMLHttpRequest();
+			xhr.open("GET", url);
+			xhr.setRequestHeader('Accept', 'image/jpeg/jpg');
+			xhr.responseType = "blob";
+			xhr.onload = () => {
+				if (xhr.status == 200) {
+					blob = xhr.response;
+					let imgFile = new File([blob], imageName, { type: 'image/jpeg/jpg' });
+					console.log(imgFile)
+					callback.call(this, imgFile);
+				}
+			};
+			xhr.send();
+		}
+
+		function loadImage(url) {
+			getImageFileFromUrl(url, 'testFile.jpg', function (file) {
+				console.log(file)
+				var r = new FileReader()
+				r.readAsDataURL(file)
+				r.onload = function (e) {
+					var base64 = e.target.result;
+					document.getElementById('artwork_img').src = base64;
+				}
+			});
+		}
+		plot_treemap("", 5, 'dd')
 	</script>
 
 </body>

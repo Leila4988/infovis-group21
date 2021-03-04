@@ -1,5 +1,13 @@
-artist,startYear,endYear,color
-Pissarro,1830,1902,#6c486b
-Monet,1840,1927,#a05d56
-Manet,1832,1883,#d0743c
-Gogh,1832,1883,#d0743c
+artist,startYear,endYear,color,fullname
+Frederic,1850,1870,#a49177,Frederic Bazille
+Gustave,1850,1894,#241f3e,Gustave Caillebotte
+Mary,1868,1923,#e7d7be,Mary Cassatt
+Paul,1850,1910,#9d9f9b,Paul Cezanne
+Edgar,1845,1912,#877e6d,Edgar Degas
+Armand,1867,1917,#988996,Armand Guillaumin
+Edouard,1849,1905,#cec7ab,Edouard Manet
+Claude,1858,1926,#232d27,Claude Monet
+Berthe,1850,1894,#160d13,Berthe Morisot
+Camille,1853,1903,#14130c,Camille Pissarro
+Auguste,1864,1919,#929bb6,Pierre-Auguste Renoir
+Alfred,1849,1898,#261c12,Alfred Sisley

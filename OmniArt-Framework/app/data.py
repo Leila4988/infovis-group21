@@ -7,6 +7,11 @@ stats_ams_meta = pd.read_csv("app/data/ams_stats_infovis_metadata.csv", sep=";")
 artist_data = pd.read_csv('app/data/artist.csv')
 year_data = pd.read_csv('app/data/year.csv')
 color_data = pd.read_csv('app/data/colors.csv')
+artwork_data = pd.read_csv('app/data/artwork_colors.csv')
+
+# process data
+
+
 ##########################
 
 model_data = stats_ams.copy()

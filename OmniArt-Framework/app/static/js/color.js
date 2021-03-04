@@ -10,12 +10,15 @@ function removeOldBlocks() {
         .remove();
 }
 
-function plot_year(artist_name) {
+function plot_year(artist_name,start,end,fullname) {
     var fetch_url = "/year_data?artist_name=" + artist_name;
     fetch(fetch_url)
         .then(function (response) { return response.json(); })
         .then((data) => {
             removeOldChart()
+            var y = document.getElementById("artist_year_name");
+            y.innerHTML = fullname + " " + start + "-" + end;
+
             // Scale the range of the data in the domains
             x_year.domain(data.map(function (d) { return d.year; }));
             y_year.domain([0, d3.max(data, function (d) { return d.count; })]);
@@ -41,8 +44,8 @@ function plot_year(artist_name) {
                 .attr("fill", function (d) { return d.color })
                 .attr("width", x_year.bandwidth() / 2)
                 .attr("height", function (d) { return year_bar_height - y_year(d.count); })
-                .attr("rx", 15)
-                .attr("ry", 20)
+                .attr("rx", 10)
+                .attr("ry", 15)
                 .on("click", function (d, i) {
                     var artist_name = d.artist, year = d.year;
                     plot_blocks(artist_name, year)
@@ -54,7 +57,9 @@ function plot_year(artist_name) {
                 .attr("class", "xAxis")
                 .attr("transform", "translate(0," + year_bar_height + ")")
                 .call(d3.axisBottom(x_year))
-                .call(g => g.select(".domain").attr('stroke-width', 0));
+                .call(g => g.select(".domain").attr('stroke-width', 0))
+                .selectAll("text")
+                .attr("transform", "rotate(80)");
             // remove());
 
             // // add the Y Axis
@@ -97,19 +102,25 @@ function plot_blocks(artist_name, year) {
             x_block.domain(domains);
             for (var n = 0; n < vertical_numbers; n++) domains.push(n + 1)
             y_block.domain(domains);
+            console.log(vertical_numbers); 
 
             color_group.selectAll(".colorBlock")
                 .data(data)
                 .enter()
                 .append("rect")
                 .attr("class", "colorBlock")
-                .attr("x", function (d, i) { console.log(x_block((i + 1) % horizontal_numbers)); return x_block((i + 1) % horizontal_numbers) })
-                .attr("y", function (d, i) { return y_block((i + 1) / vertical_numbers) })
+                .attr("x", function (d, i) { 
+                    // console.log(Math.ceil((i + 1) % horizontal_numbers)); 
+                    return x_block(Math.ceil((i + 1) % horizontal_numbers)) })
+                .attr("y", function (d, i) { 
+                    console.log((i + 1) / horizontal_numbers); 
+                return y_block(Math.ceil((i + 1) / horizontal_numbers)) })
                 .attr("fill", function (d) { return d.color })
                 .attr("width", block_height * 2 / 3)
                 .attr("height", block_height * 2 / 3)
                 .on("click", function (d, i) {
                     // plot_img(d.id)
+                    plot_treemap(d.artwork_url, d.paint_id, d.artwork_name, d.year)
                 })
 
         });
