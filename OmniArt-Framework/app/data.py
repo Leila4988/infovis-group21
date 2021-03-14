@@ -8,6 +8,7 @@ artist_data = pd.read_csv('app/data/artist.csv')
 year_data = pd.read_csv('app/data/year.csv')
 color_data = pd.read_csv('app/data/colors.csv')
 artwork_data = pd.read_csv('app/data/artwork_colors.csv')
+usage_data = pd.read_csv('app/data/sample_usage.csv')
 
 # process data
 

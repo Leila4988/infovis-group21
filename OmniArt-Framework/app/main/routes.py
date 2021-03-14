@@ -167,6 +167,12 @@ def artwork_data():
 
 	return plot_data
 
+#
+@main.route('/usage_data', methods = ['GET'])
+def usage_data():
+	colour_name = request.args.get("colour_name")
+	plot_data = data.usage_data.loc[data.usage_data['colour_name'] == colour_name]
+	plot_data = plot_data.to_json(orient='records')
 
-
+	return plot_data
 

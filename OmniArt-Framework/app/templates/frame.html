@@ -15,10 +15,14 @@
 
 	<!-- D3 package -->
 	<script src="https://d3js.org/d3.v5.min.js"></script>
+	<script src="https://d3js.org/d3.v4.js"></script>
+	<script src="https://cdn.jsdelivr.net/gh/holtzy/D3-graph-gallery@master/LIB/d3-scale-radial.js"></script>
 	<link rel="stylesheet" type="text/css" href="../static/css/frame.css">
 	<script type="text/javascript" src="../static/js/artist.js"></script>
 	<script type="text/javascript" src="../static/js/color.js"></script>
 	<script type="text/javascript" src="../static/js/treemap.js"></script>
+	<script type="text/javascript" src="../static/js/usage1.js"></script>
+	<script type="text/javascript" src="../static/js/usage2.js"></script>
 
 	<style>
 		p,
@@ -37,7 +41,7 @@
 	<div class="container-fluid mw-100">
 		<div class="row pt-3 m-2">
 			<div class="col-lg-7 col-12 ">
-				<div class="row box p-3 mt-4 box1" id="artistBarchart">
+				<div class="row box p-3 mt-1 box1" id="artistBarchart">
 					Main Impressionists
 				</div>
 				<div class="row box p-3 mt-4 box2" id="colorBarchart">
@@ -45,10 +49,31 @@
 				</div>
 			</div>
 			<div class="col-lg-5 col-12">
-				<div class="row box mt-4 ml-2 p-3 box3" id="artworkTreemap">
+				<div class="row box mt-1 ml-2 p-3 box3" id="artworkTreemap">
 					<p id="artwork_name"> </p>
 					<div class="img-box">
 						<img id="artwork_img">
+					</div>
+				</div>
+			</div>
+			<div class="col-12">
+				<div class="row box mt-1 p-1 box4" >
+					 Colour Usage
+					 
+					 <div class="col-lg-4 col-12" id="my_dataviz">
+
+					 </div>
+					 <div class="col-lg-6 col-12">
+					 	<div id="usage1">
+					 	   <p>Selected color usage among all paintings (top 5 artists)</p>
+					 	</div>
+					 	<div id="usage2">
+					      <p>Number of paintings in selected color (top 5 artists)</p>
+					 	</div>
+
+					 </div>
+					<div>
+						
 					</div>
 				</div>
 			</div>
@@ -115,7 +140,7 @@
 			.attr("height", treemap_height)
 			.attr("width", treemap_width)
 			.attr("transform", "translate(" + treemap_margin.left + "," + treemap_margin.top + ")");;
-
+       
 
 		//load picture
 		function getImageFileFromUrl(url, imageName, callback) {
@@ -148,6 +173,29 @@
 			});
 		}
 		plot_treemap("", 5, 'dd')
+
+
+
+        // set the dimensions and margins of the graph
+		var donut_width = 750
+		    donut_height =150
+		    donut_margin = 20
+		// The radius of the pieplot is half the width or half the height (smallest one). I subtract a bit of margin.
+        var radius = Math.min(donut_width, donut_height) / 2 - donut_margin
+
+        plot_donut("black");
+
+	var wheel_margin = {top: 0, right: 0, bottom: 0, left: 0},
+    	wheel_width = 360 - wheel_margin.left - wheel_margin.right,
+    	wheel_height = 360 - wheel_margin.top - wheel_margin.bottom,
+    	innerRadius = 30,
+    	outerRadius = Math.min(wheel_width, wheel_height) / 2.5; 
+    	plotWheel();
+
+
+
+        
+
 	</script>
 
 </body>
