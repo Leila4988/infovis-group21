@@ -61,12 +61,23 @@ function plot() {
                 .attr("fill", function (d) { return d.color })
                 .attr("width", function (d) { return x(d.endYear)-x(d.startYear); })
                 .attr("height", y.bandwidth() / 3)
-                .attr("rx", 10)
-                .attr("ry", 15)
+                .attr("rx", 3)
+                .attr("ry", 3)
                 .on("click", function (d, i) {
                     var artist_name = d.artist;
                     plot_year(artist_name,d.startYear,d.endYear,d.fullname)
+
                 })
+                .on ("mouseover", function (d, i){
+                    d3.select(this).style("fill", d.data )
+                        .style("stroke","#000")
+                        .style("stroke-width", "1.5px")
+
+            })
+                .on("mouseout", function(d, i) {
+                 d3.select(this).style("fill",d.color)
+                     .style("stroke", d.data);
+                });
 
             // add the X Axis
             artistSvg.append("g")

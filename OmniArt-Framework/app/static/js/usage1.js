@@ -45,11 +45,18 @@ d3.csv("https://raw.githubusercontent.com/Dongliang7/AML-group64/main/colorlist.
           .padRadius(innerRadius))
       .on("click",function(d){
         d3.select(this)
-          .attr("fill" , "red");
+
         var colour_name = d.Colour;
           removeOldDonut();
           plot_donut(colour_name)
       })
+      .on ("mouseover", function (d, i){
+          d3.select(this).style("fill", "red");
+      })
+      .on("mouseout", function(d, i) {
+                 d3.select(this).style("fill", d.color )
+
+                });
   // Add the labels
   svg.append("g")
       .selectAll("g")

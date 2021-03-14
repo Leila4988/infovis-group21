@@ -2,7 +2,6 @@
 body {
 	background-color: #F9FAFC;
 
-
 }
 
 .box {
@@ -13,11 +12,11 @@ body {
 
 
 .box1 {
-	min-height: 320px;
+	min-height: 300px;
 }
 
 .box2 {
-	min-height: 376px;
+	min-height: 320px;
 }
 
 .box3 {

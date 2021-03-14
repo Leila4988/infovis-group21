@@ -3,14 +3,23 @@ function removeOldChart() {
         .remove();
     d3.select("#color_group")
         .remove();
+    d3.select("#year_grid")
+        .remove();
+}
+
+// gridlines in x axis function
+function make_y_year_gridlines() {
+    return d3.axisLeft(y_year)
+        .ticks(7)
 }
 
 function removeOldBlocks() {
     d3.select("#color_group")
         .remove();
+        
 }
 
-function plot_year(artist_name,start,end,fullname) {
+function plot_year(artist_name, start, end, fullname) {
     var fetch_url = "/year_data?artist_name=" + artist_name;
     fetch(fetch_url)
         .then(function (response) { return response.json(); })
@@ -23,16 +32,26 @@ function plot_year(artist_name,start,end,fullname) {
             x_year.domain(data.map(function (d) { return d.year; }));
             y_year.domain([0, d3.max(data, function (d) { return d.count; })]);
 
+            // add the Y grid
+            yearSvg.append("g")
+                .attr("class", "grid")
+                .attr("id", "year_grid")
+                .attr("transform", "translate(20," + 5 + ")")
+                .call(make_y_year_gridlines()
+                    .tickSize(-year_svg_width + 15)
+                    .tickFormat("")
+                )
+
             // add react group
             var year_group = yearSvg.append("g")
                 .attr("id", "year_group")
                 .attr("width", year_svg_width)
                 .attr("height", year_bar_height)
-                .attr("transform", "translate(" + 0 + "," + 0 + ")");
+                .attr("transform", "translate(" + 0 + "," + 5 + ")");
 
             var year_chart = year_group.append("g")
                 .attr("id", "year_chart")
-                .attr("transform", "translate(" + 0 + "," + 0 + ")");
+                .attr("transform", "translate(" + 15 + "," + 0 + ")");
 
             year_chart.selectAll(".yearbar")
                 .data(data)
@@ -44,30 +63,50 @@ function plot_year(artist_name,start,end,fullname) {
                 .attr("fill", function (d) { return d.color })
                 .attr("width", x_year.bandwidth() / 2)
                 .attr("height", function (d) { return year_bar_height - y_year(d.count); })
-                .attr("rx", 10)
-                .attr("ry", 15)
+                .attr("rx", 3)
+                .attr("ry", 3)
                 .on("click", function (d, i) {
                     var artist_name = d.artist, year = d.year;
                     plot_blocks(artist_name, year)
                 })
+                .on ("mouseover", function (d, i){
+                    d3.select(this).style("fill", d.data )
+                        .style("stroke","#000")
+                        .style("stroke-width", "1.5px")
 
+            })
+                .on("mouseout", function(d, i) {
+                 d3.select(this).style("fill",d.color)
+                     .style("stroke", d.data);
+                });
+                
+
+            const ticksAmount = 5;
+            const tickStep = (d3.max(data, function (d) { return d.count; }) - d3.min(data, function (d) { return d.count; })) / (ticksAmount);
+            const step = Math.ceil(tickStep / 5) * 5;
 
             // add the X Axis
             year_group.append("g")
                 .attr("class", "xAxis")
-                .attr("transform", "translate(0," + year_bar_height + ")")
-                .call(d3.axisBottom(x_year))
+                .attr("transform", "translate(15," + year_bar_height + ")")
+                .call(d3.axisBottom(x_year)
+                    .tickValues(x_year.domain().filter(function (d, i) { return !(i % 10) })))
                 .call(g => g.select(".domain").attr('stroke-width', 0))
-                .selectAll("text")
-                .attr("transform", "rotate(80)");
+            // .selectAll("text")
+            // .attr("transform", "rotate(80)");
             // remove());
 
-            // // add the Y Axis
-            // artistSvg.append("g")
-            //     .attr("class", "yAxis")
-            //     .attr("transform", "translate(" + 50 + ",20)")
-            //     .call(d3.axisLeft(y))
-            //     .call(g => g.select(".domain").attr('stroke-width', 0));
+            // add the Y Axis
+            year_group.append("g")
+                .attr("class", "yAxis")
+                .attr("transform", "translate(" + 22 + ",0)")
+                .call(d3.axisLeft(y_year).ticks(10))
+                .call(g => g.select(".domain").attr('stroke-width', 0));
+
+            //default vis
+            console.log(default_artist['artist_name'],default_artist['year'])
+            
+            // plot_blocks(default_artist['artist_name'], default_artist['year'])
         });
 }
 
@@ -102,19 +141,21 @@ function plot_blocks(artist_name, year) {
             x_block.domain(domains);
             for (var n = 0; n < vertical_numbers; n++) domains.push(n + 1)
             y_block.domain(domains);
-            console.log(vertical_numbers); 
+            console.log(vertical_numbers);
 
             color_group.selectAll(".colorBlock")
                 .data(data)
                 .enter()
                 .append("rect")
                 .attr("class", "colorBlock")
-                .attr("x", function (d, i) { 
+                .attr("x", function (d, i) {
                     // console.log(Math.ceil((i + 1) % horizontal_numbers)); 
-                    return x_block(Math.ceil((i + 1) % horizontal_numbers)) })
-                .attr("y", function (d, i) { 
-                    console.log((i + 1) / horizontal_numbers); 
-                return y_block(Math.ceil((i + 1) / horizontal_numbers)) })
+                    return x_block(Math.ceil((i + 1) % horizontal_numbers))
+                })
+                .attr("y", function (d, i) {
+                    console.log((i + 1) / horizontal_numbers);
+                    return y_block(Math.ceil((i + 1) / horizontal_numbers))
+                })
                 .attr("fill", function (d) { return d.color })
                 .attr("width", block_height * 2 / 3)
                 .attr("height", block_height * 2 / 3)
@@ -122,7 +163,15 @@ function plot_blocks(artist_name, year) {
                     // plot_img(d.id)
                     plot_treemap(d.artwork_url, d.paint_id, d.artwork_name, d.year)
                 })
+                .on ("mouseover", function (d, i){
+                    d3.select(this).style("fill", d.data )
+                        .style("stroke","#000")
+                        .style("stroke-width", "1.5px")
 
+            })
+                .on("mouseout", function(d, i) {
+                 d3.select(this).style("fill",d.color)
+                     .style("stroke", d.data);
+                });
         });
-
 }
