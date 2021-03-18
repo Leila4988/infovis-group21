@@ -102,3 +102,17 @@ http://www.webexhibits.org/pigments/intro/industrialization.html
 #### 2. Fix picture-loading and other bugs in previous components
 #### 3. Develop the new component
 #### 4. Continue with data process 
+
+## Week 7
+### Meeting with TA (11/03/2021)
+#### 1. Continue developing the second analyze component
+#### 2. Improve the guide-helper and complete the debug of first explore component
+
+### Progress
+#### 1.Add guide-helpers to the first explore component
+#### 2.Download all the images to improve the speed
+#### 3.Develop the second analyze component
+
+### To-dos
+#### 1. Remove the invalid urls of images
+#### 2. Continue developing the second component
