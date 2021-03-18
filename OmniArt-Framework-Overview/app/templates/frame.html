@@ -1,0 +1,157 @@
+<!-- base.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="description" content="">
+	<meta name="author" content="">
+	<title>OmniArt Colours</title>
+
+	<!-- Bootstrap core CSS -->
+	<link href="https://getbootstrap.com/docs/4.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+	<!-- D3 package -->
+	<script src="https://d3js.org/d3.v5.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="../static/css/frame.css">
+	<link rel="stylesheet" type="text/css" href="../static/css/tooltip.css">
+	<script type="text/javascript" src="../static/js/artist.js"></script>
+	<script type="text/javascript" src="../static/js/color.js"></script>
+	<script type="text/javascript" src="../static/js/treemap.js"></script>
+	<script type="text/javascript" src="../static/js/tooltip.js"></script>
+
+	<style>
+		p,
+		.txt {
+			text-align: justify;
+			text-justify: inter-word;
+		}
+	</style>
+</head>
+
+<body>
+	<nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap navbar-expand-md" id="navbar-top">
+		<a class="navbar-brand col-1" id="title" href="#">OmniArt Colours</a>
+	</nav>
+	<div class="container-fluid mw-100" style="height: 100vw;">
+		<div class="row pt-3 m-2" style="height: 100vw;">
+			<div class="col-lg-7 col-12 ">
+				<div class="row box p-3 mt-4 box1" id="artistBarchart">
+					Main Impressionists
+				</div>
+				<div class="row box p-3 mt-4 box2" id="colorBarchart">
+					<p id="artist_year_name">Favorite color and artwork numbers over time</p>
+				</div>
+			</div>
+			<div class="col-lg-5 col-12">
+				<div class="row box mt-4 ml-2 p-3 box3" id="artworkTreemap">
+					<label id="artwork_name">Treemap of One Artwork</label>
+					<div class="img-box">
+						<img id="artwork_img">
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="tooltip" id="tooltip"></div>
+	<script type="text/javascript">
+		//artistBarchart-begin
+		var margin = { top: 20, right: 20, bottom: 30, left: 35 },
+			artist_width = document.getElementById('artistBarchart').clientWidth,
+			artist_height = document.getElementById('artistBarchart').clientHeight;
+
+		var artistSvg = d3.select("#artistBarchart").append("svg")
+			.attr("id", "artistSvg")
+			.attr("height", artist_height)
+			.attr("width", artist_width);
+
+		artist_width = document.getElementById('artistSvg').clientWidth;
+		artist_height = document.getElementById('artistSvg').clientHeight
+
+		var artist_bar_width = artist_width - margin.left - margin.right,
+			artist_bar_height = artist_height - margin.bottom;
+
+		// set the ranges
+		var x = d3.scaleLinear().range([margin.left, artist_bar_width]);
+		var y = d3.scaleBand().range([artist_bar_height, 0]).padding(0.1);
+
+		//year-component begins
+		var year_margin = { top: 0, right: 20, bottom: 0, left: 0 },
+			year_width = document.getElementById('colorBarchart').clientWidth,
+			year_height = document.getElementById('colorBarchart').clientHeight;
+
+		var yearSvg = d3.select("#colorBarchart").append("svg")
+			.attr("id", "yearSvg")
+			.attr("height", year_height)
+			.attr("width", year_width);
+
+		var year_svg_width = document.getElementById('yearSvg').clientWidth - year_margin.right - year_margin.left,
+			year_svg_height = document.getElementById('yearSvg').clientHeight - year_margin.bottom - year_margin.top;
+
+		var year_bar_height = year_svg_height * 3 / 4,
+			color_blocks_height = year_svg_height / 4 - 10;
+
+		var x_year = d3.scaleBand().range([year_margin.left, year_svg_width-15]).padding(0.1),
+			y_year = d3.scaleLinear().range([year_bar_height, 0]);
+
+		var x_block = d3.scaleBand().range([year_margin.left, year_svg_width]).padding(0.1),
+			y_block = d3.scaleBand().range([year_margin.left, year_svg_width]).padding(0.1);
+
+		plot();
+
+		// plot_year("Pissarro");
+
+		// plot_blocks("Pissarro", 1850);
+
+		//artistBarchart-end
+
+		// treemap
+		var treemap_margin = { top: 10, right: 50, bottom: 10, left: 60 },
+			treemap_width = document.getElementById('artworkTreemap').clientWidth - 150,
+			treemap_height = document.getElementById('artworkTreemap').clientHeight / 2 - 50;
+
+		var treemapSvg = d3.select("#artworkTreemap").append("svg")
+			.attr("id", "treeMap")
+			.attr("height", treemap_height)
+			.attr("width", treemap_width)
+			.attr("transform", "translate(" + treemap_margin.left + "," + treemap_margin.top + ")");;
+
+
+		//load picture
+		function getImageFileFromUrl(url, imageName, callback) {
+			// imageName一定要带上后缀
+			var blob = null;
+			var xhr = new XMLHttpRequest();
+			xhr.open("GET", url);
+			xhr.setRequestHeader('Accept', 'image/jpeg/jpg');
+			xhr.responseType = "blob";
+			xhr.onload = () => {
+				if (xhr.status == 200) {
+					blob = xhr.response;
+					let imgFile = new File([blob], imageName, { type: 'image/jpeg/jpg' });
+					console.log(imgFile)
+					callback.call(this, imgFile);
+				}
+			};
+			xhr.send();
+		}
+
+		function loadImage(url) {
+			getImageFileFromUrl(url, 'testFile.jpg', function (file) {
+				console.log(file)
+				var r = new FileReader()
+				r.readAsDataURL(file)
+				r.onload = function (e) {
+					var base64 = e.target.result;
+					document.getElementById('artwork_img').src = base64;
+				}
+			});
+		}
+		
+	</script>
+
+</body>
+
+</html>

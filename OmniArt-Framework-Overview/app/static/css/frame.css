@@ -1,0 +1,84 @@
+html,body, .container-fluid{
+    height: 100%;
+    padding: 0;
+    margin: 0;
+}
+
+body {
+	background-color: #F9FAFC;
+    /* overflow: hidden; */
+}
+
+.box {
+    background-color: #FFF;
+    border: 1px solid #EEE;
+    border-radius: 4px;
+    /* margin: 10px; */
+}
+
+
+.box1 {
+	min-height: 17%;
+    margin-top: 50px;
+}
+
+.box2 {
+	min-height: 18%;
+}
+
+.box3 {
+	min-height: 42%;
+}
+
+.grid line {
+    stroke: lightgrey;
+    stroke-opacity: 0.7;
+    shape-rendering: crispEdges;
+    visibility: visible;
+  }
+  
+.grid path {
+    stroke-width: 0;
+}
+
+.xAxis .tick line{
+    visibility:hidden;
+}
+
+.xAxis .tick text{
+    fill:gray;
+    /* transform: rotate(30); */
+}
+
+.yAxis .tick line{
+    visibility:hidden;
+}
+
+.yAxis .tick text{
+    fill:gray;
+    /* transform: rotate(30); */
+}
+
+.img-box{
+    /*限定图片盒子宽高*/
+    margin-left: 70px;
+    width:300px;
+    height:300px;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+
+img{
+    width:auto;
+    height:auto;
+    max-width:100%;
+    max-height:100%;
+    /*不定宽高的图片居中显示*/
+    position: relative;
+    display: inline-block;
+    vertical-align: middle;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%)
+}
