@@ -1,7 +1,7 @@
 // gridlines in x axis function
 function make_x_gridlines() {
     return d3.axisBottom(x)
-        .ticks(5)
+        .ticks(10)
 }
 
 // gridlines in y axis function
@@ -21,35 +21,46 @@ function plot() {
             artists = []
             colors = []
             number = data.length
+            default_artist = {}
+            index = 0
             data.forEach(function (d) {
+                if (index == 0) {
+                    default_artist['artist_name'] = d.artist
+                    default_artist['startYear'] = +d.startYear
+                    default_artist['endYear'] = +d.endYear
+                    default_artist['fullname'] = d.fullname
+                    index += 1
+                    //default vis
+                    plot_year(default_artist['artist_name'], default_artist['startYear'], default_artist['endYear'], default_artist['fullname'])
+                }
+                else {
+
+                }
                 d.startYear = +d.startYear;
                 d.endYear = +d.endYear;
                 artists.push(d.artist)
                 colors.push(d.color)
             });
+            selected_artist = default_artist.artist_name
 
             x.domain([d3.min(data, function (d) { return d.startYear; }), d3.max(data, function (d) { return d.endYear; })])
             y.domain(artists)
-
-            console.log(x(1927))
-            console.log(artist_bar_width)
-            console.log(artist_width)
 
             // add the X grid
             artistSvg.append("g")
                 .attr("class", "grid")
                 .attr("transform", "translate(20," + artist_bar_height + ")")
                 .call(make_x_gridlines()
-                    .tickSize(-artist_bar_height)
+                    .tickSize(-year_svg_height)
                     .tickFormat("")
                 )
 
             // add react
             var chart_group = artistSvg.append("g")
                 .attr("id", "chart_group")
-                .attr("transform", "translate("+20+ "," + 0 + ")")
-            
-               
+                .attr("transform", "translate(" + 20 + "," + 0 + ")")
+
+
 
             chart_group.selectAll(".artistbar")
                 .data(data)
@@ -59,24 +70,52 @@ function plot() {
                 .attr("x", function (d) { return x(d.startYear) })
                 .attr("y", function (d) { return y(d.artist) + y.bandwidth() / 3 })
                 .attr("fill", function (d) { return d.color })
-                .attr("width", function (d) { return x(d.endYear)-x(d.startYear); })
+                .attr("width", function (d) { return x(d.endYear) - x(d.startYear); })
                 .attr("height", y.bandwidth() / 3)
+                .attr("stroke", function (d,i) { 
+                    if (i == 0){return "red" }
+                    else {return "white"}
+                })
+                .attr("stroke-width", "1.5px")
                 .attr("rx", 3)
                 .attr("ry", 3)
                 .on("click", function (d, i) {
+                    d3.selectAll(".artistbar").attr("stroke", "white");
+                    d3.select(this).attr("stroke", "red");
+                    // d3.select(this).attr({ "stroke-width": "50%", "stroke": "black" });
                     var artist_name = d.artist;
-                    plot_year(artist_name,d.startYear,d.endYear,d.fullname)
-
+                    selected_artist = d.artist;
+                    plot_year(artist_name, d.startYear, d.endYear, d.fullname)
                 })
-                .on ("mouseover", function (d, i){
-                    d3.select(this).style("fill", d.data )
-                        .style("stroke","#000")
-                        .style("stroke-width", "1.5px")
+                .on("mouseover", function (d, i) {
+                    d3.selectAll(".artistbar").attr("stroke", function (d,i) { 
+                        if (d.artist == selected_artist){return "red" }
+                        else {return "white"}
+                    });
+                    d3.select(this).attr("stroke", "black");
 
-            })
-                .on("mouseout", function(d, i) {
-                 d3.select(this).style("fill",d.color)
-                     .style("stroke", d.data);
+                    displayTooltip("<b>Artist: </b>" + d.fullname + "<br /><b>From: </b>" +
+                    d.startYear + "<br /><b>To: </b>" + d.endYear)
+                })
+                .on("mousemove", function (d, i) {
+                    d3.selectAll(".artistbar").attr("stroke", function (d,i) { 
+                        if (d.artist == selected_artist){return "red" }
+                        else {return "white"}
+                    });
+                    d3.select(this).attr("stroke", "black");
+
+                    displayTooltip("<b>Artist: </b>" + d.fullname + "<br /><b>From: </b>" +
+                    d.startYear + "<br /><b>To: </b>" + d.endYear)
+        
+                    //d3.select(this).attr("fill", "DarkOrange");
+                })
+                .on("mouseout", function (d) {
+                    d3.selectAll(".artistbar").attr("stroke", function (d,i) { 
+                        if (d.artist == selected_artist){return "red" }
+                        else {return "white"}
+                    });
+                    hideTooltip();
+                    //d3.select(this).attr("fill", "steelblue");
                 });
 
             // add the X Axis
@@ -94,5 +133,7 @@ function plot() {
                 .attr("transform", "translate(" + 50 + ",0)")
                 .call(d3.axisLeft(y))
                 .call(g => g.select(".domain").attr('stroke-width', 0));
+
         });
+
 }

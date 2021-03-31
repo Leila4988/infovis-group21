@@ -39,7 +39,7 @@ function plot_treemap(url, artwork_id, artwork_name, year) {
   fetch(fetch_url)
     .then(function (response) { return response.json(); })
     .then((data) => {
-      loadImage(url)
+      loadImage("/image_data?id="+artwork_id)
       // loadImage("https://uploads2.wikiart.org/images/frederic-bazille/woman-in-moorish-costume.jpg")
       removeOldTreemap()
       var index = 0

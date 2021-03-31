@@ -1,27 +1,75 @@
+html,body, .container-fluid{
+    height: 100%;
+    padding: 0;
+    margin: 0;
+}
 
 body {
 	background-color: #F9FAFC;
+    overflow-y: hidden;
+}
 
+.horizontal-scrollable > .row {
+    overflow-x: auto;
+    white-space: nowrap;
+}
+  
+.horizontal-scrollable > .row > .col-lg-7 {
+    display: inline-block;
+    float: none;
+}
+
+.horizontal-scrollable > .row > .col-lg-5 {
+    display: inline-block;
+    float: none;
+}
+
+.horizontal-scrollable > .row > .col-lg-4 {
+    display: inline-block;
+    float: none;
+}
+
+.horizontal-scrollable > .row > .col-lg-6 {
+    display: inline-block;
+    float: none;
+}
+
+.horizontal-scrollable > .row > .col-lg-12 > .col-lg-4 {
+    display: inline-block;
+    float: none;
+}
+
+.horizontal-scrollable > .row > .col-lg-12 > .col-lg-6 {
+    display: inline-block;
+    float: none;
 }
 
 .box {
     background-color: #FFF;
     border: 1px solid #EEE;
     border-radius: 4px;
+    /* margin: 10px; */
 }
 
 
 .box1 {
-	min-height: 300px;
+	min-height: 17%;
+    margin-top: 50px;
+    /* display: inline-block; */
 }
 
 .box2 {
-	min-height: 320px;
+	min-height: 18%;
 }
 
 .box3 {
-	min-height: 720px;
+	min-height: 42%;
 }
+
+.box4 {
+	min-height: 42%;
+}
+
 
 .grid line {
     stroke: lightgrey;
@@ -47,6 +95,11 @@ body {
     visibility:hidden;
 }
 
+.yAxis .tick text{
+    fill:gray;
+    /* transform: rotate(30); */
+}
+
 .img-box{
     /*限定图片盒子宽高*/
     margin-left: 70px;
@@ -55,6 +108,7 @@ body {
     display: inline-block;
     vertical-align: middle;
 }
+
 
 img{
     width:auto;

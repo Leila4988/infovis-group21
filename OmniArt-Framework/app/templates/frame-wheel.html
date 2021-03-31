@@ -70,13 +70,13 @@
 					</div>
 				</div>
 			</div>
-			<div class="col-lg-12 col-12">
+			<div class="col-12">
 				<div class="row box mt-1 p-1 box4">
-					<div class="col-lg-6 col-12" id="my_dataviz">
-						<p>Colour Usage</p>
+					Colour Usage
+					<div class="col-lg-4 col-12" id="my_dataviz">
 					</div>
 					<div class="col-lg-6 col-12" id="usageBarChart">
-						<p>Dominant Colour Usage Ranking Per Artist</p>
+						<p>Dominant Color Usage Ranking Per Artist</p>
 					</div>
 				</div>
 			</div>
@@ -195,11 +195,12 @@
 
 		plot_usage("yellow")
 
-		var donut_margin = { top: 0, right: 0, bottom: 0, left: 0 },
-			donut_width = document.getElementById('my_dataviz').clientWidth - donut_margin.left - donut_margin.right,
-			donut_height = document.getElementById('my_dataviz').clientHeight - donut_margin.top - donut_margin.bottom,
-			radius = Math.min(donut_width, donut_height) / 2 - 0;
-		plot_donut();
+		var wheel_margin = { top: 0, right: 0, bottom: 0, left: 0 },
+			wheel_width = 360 - wheel_margin.left - wheel_margin.right,
+			wheel_height = 360 - wheel_margin.top - wheel_margin.bottom,
+			innerRadius = 30,
+			outerRadius = Math.min(wheel_width, wheel_height) / 2.5;
+		plotWheel();
 
 
 	</script>

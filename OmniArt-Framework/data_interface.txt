@@ -27,3 +27,13 @@ one artist has multiple records for different years;
 format:
 artist,year,color(the dominant color of this paint),paint_id(defined by back_end; make sure one paint has one unique paint_id)
 Pissarro,1850,#6c486b,2
+
+usage.csv - for color blocks:
+description:
+contains all dominant colors in different years of all artists;
+one record for dominant color in one year of one artist;
+one artist has multiple records for different years;
+
+format:
+
+Pissarro,1850,#6c486b,2

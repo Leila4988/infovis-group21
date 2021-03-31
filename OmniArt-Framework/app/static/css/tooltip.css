@@ -6,17 +6,17 @@
 
 #tooltip {
     position: absolute;
-    color: black;
-    border: 1px solid black;
+    color: gray;
+    border: 1px solid gray;
     font-size: 1.1em;
     text-align: left;
     padding: 8px;
     background: white;
-    opacity: 0.9;
+    opacity: 1.0;
     pointer-events: none;
     display: none;
     z-index: 1021;
-    font-size: 12px;
+    font-size: 5px;
 }
 
 .grid line {

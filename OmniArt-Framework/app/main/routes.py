@@ -1,4 +1,4 @@
-from flask import render_template, request, jsonify
+from flask import render_template, request, jsonify, Response
 import os, json
 
 from decimal import Decimal
@@ -167,6 +167,22 @@ def artwork_data():
 
 	return plot_data
 
+@main.route('/image_data', methods = ['GET'])
+def image_data():
+	image_id = request.args.get("id")
+	imgPath = "app/data/images/"+image_id+".jpg"
+	with open(imgPath, 'rb') as f:
+		image = f.read()
+	resp = Response(image, mimetype="image/jpeg")
+	return resp
+
+@main.route('/color_list', methods = ['GET'])
+def color_list():
+	plot_data = data.color_list
+	plot_data = plot_data.to_json(orient='records')
+	return plot_data
+
+
 #
 @main.route('/usage_data', methods = ['GET'])
 def usage_data():
@@ -175,4 +191,6 @@ def usage_data():
 	plot_data = plot_data.to_json(orient='records')
 
 	return plot_data
+
+
 

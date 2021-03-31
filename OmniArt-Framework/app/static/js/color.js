@@ -16,7 +16,6 @@ function make_y_year_gridlines() {
 function removeOldBlocks() {
     d3.select("#color_group")
         .remove();
-        
 }
 
 function plot_year(artist_name, start, end, fullname) {
@@ -27,7 +26,21 @@ function plot_year(artist_name, start, end, fullname) {
             removeOldChart()
             var y = document.getElementById("artist_year_name");
             y.innerHTML = fullname + " " + start + "-" + end;
-
+            index = 0
+            default_artist = {}
+            data.forEach(function (d) {
+                if (index == 0) {
+                    default_artist['artist_name'] = d.artist
+                    default_artist['year'] = +d.year
+                    console.log("plot")
+                    plot_blocks(default_artist['artist_name'], default_artist['year'])
+                    index = 1
+                }
+                else{
+                    
+                }
+            });
+            selected_year = default_artist.year
             // Scale the range of the data in the domains
             x_year.domain(data.map(function (d) { return d.year; }));
             y_year.domain([0, d3.max(data, function (d) { return d.count; })]);
@@ -63,23 +76,53 @@ function plot_year(artist_name, start, end, fullname) {
                 .attr("fill", function (d) { return d.color })
                 .attr("width", x_year.bandwidth() / 2)
                 .attr("height", function (d) { return year_bar_height - y_year(d.count); })
-                .attr("rx", 3)
-                .attr("ry", 3)
+                .attr("stroke-width", "1.5px")
+                .attr("rx", 4)
+                .attr("ry", 4)
+                .attr("stroke", function (d,i) { 
+                    if (i == 0){return "red" }
+                    else {return "white"}
+                })
                 .on("click", function (d, i) {
+                    d3.selectAll(".yearbar").attr("stroke", "white");
+                    d3.select(this).attr("stroke", "red");
                     var artist_name = d.artist, year = d.year;
+                    selected_year = d.year;
                     plot_blocks(artist_name, year)
                 })
-                .on ("mouseover", function (d, i){
-                    d3.select(this).style("fill", d.data )
-                        .style("stroke","#000")
-                        .style("stroke-width", "1.5px")
+                .on("mouseover", function (d, i) {
+                    // d3.selectAll(".yearbar").attr("stroke", "white");
+                    d3.selectAll(".yearbar").attr("stroke", function (d,i) { 
+                        if (d.year == selected_year){return "red" }
+                        else {return "white"}
+                    });
+                    d3.select(this).attr("stroke", "black");
 
-            })
-                .on("mouseout", function(d, i) {
-                 d3.select(this).style("fill",d.color)
-                     .style("stroke", d.data);
-                });
-                
+                    displayTooltip("<b>Artist: </b>" + d.artist + "<br /><b>Year: </b>" +
+                    d.year + "<br /><b>Artwork Number: </b>" + d.count)
+                })
+                .on("mousemove", function (d, i) {
+                    // d3.selectAll(".yearbar").attr("stroke", "white");
+                    d3.selectAll(".yearbar").attr("stroke", function (d,i) { 
+                        if (d.year == selected_year){return "red" }
+                        else {return "white"}
+                    });
+                    d3.select(this).attr("stroke", "black");
+
+                    displayTooltip("<b>Artist: </b>" + d.artist + "<br /><b>Year: </b>" +
+                    d.year + "<br /><b>Artwork Number: </b>" + d.count)
+        
+                    //d3.select(this).attr("fill", "DarkOrange");
+                })
+                .on("mouseout", function (d) {
+                    // d3.selectAll(".yearbar").attr("stroke", "white");
+                    d3.selectAll(".yearbar").attr("stroke", function (d,i) { 
+                        if (d.year == selected_year){return "red" }
+                        else {return "white"}
+                    });
+                    hideTooltip();
+                    //d3.sele
+                })
 
             const ticksAmount = 5;
             const tickStep = (d3.max(data, function (d) { return d.count; }) - d3.min(data, function (d) { return d.count; })) / (ticksAmount);
@@ -117,9 +160,24 @@ function plot_blocks(artist_name, year) {
         .then((data) => {
             removeOldBlocks()
             dominant_colors = []
+            index = 0
+            default_artist = {}
             data.forEach(function (d) {
+                if (index == 0){
+                    default_artist['artwork_url'] = d.artwork_url
+                    default_artist['paint_id'] = d.paint_id
+                    default_artist['artwork_name'] = d.artwork_name
+                    default_artist['year'] = d.year
+                    index += 1
+                }
+                else{
+                    
+                }
                 dominant_colors.push(d.color)
             });
+
+            selected_id = default_artist.paint_id
+
             var number = dominant_colors.length
             // add color-blocks group
             var color_group = yearSvg.append("g")
@@ -159,19 +217,52 @@ function plot_blocks(artist_name, year) {
                 .attr("fill", function (d) { return d.color })
                 .attr("width", block_height * 2 / 3)
                 .attr("height", block_height * 2 / 3)
+                .attr("stroke-width", "1.5px")
+                .attr("stroke", function (d,i) { 
+                    if (i == 0){return "red" }
+                    else {return "white"}
+                })
                 .on("click", function (d, i) {
+                    d3.selectAll(".colorBlock").attr("stroke", "white");
+                    d3.select(this).attr("stroke", "black");
+                    selected_id = d.paint_id
                     // plot_img(d.id)
                     plot_treemap(d.artwork_url, d.paint_id, d.artwork_name, d.year)
                 })
-                .on ("mouseover", function (d, i){
-                    d3.select(this).style("fill", d.data )
-                        .style("stroke","#000")
-                        .style("stroke-width", "1.5px")
+                .on("mouseover", function (d, i) {
+                    // d3.selectAll(".colorBlock").attr("stroke", "white");
+                    d3.selectAll(".colorBlock").attr("stroke", function (d,i) { 
+                        if (d.paint_id == selected_id){return "red" }
+                        else {return "white"}
+                    });
+                    d3.select(this).attr("stroke", "black");
 
-            })
-                .on("mouseout", function(d, i) {
-                 d3.select(this).style("fill",d.color)
-                     .style("stroke", d.data);
-                });
+                    displayTooltip("<b>Artwork: </b>" + d.artwork_name + "<br /><b>Year: </b>" +
+                    d.year)
+                })
+                .on("mousemove", function (d, i) {
+                    d3.selectAll(".colorBlock").attr("stroke", function (d,i) { 
+                        if (d.paint_id == selected_id){return "red" }
+                        else {return "white"}
+                    });
+                    d3.select(this).attr("stroke", "black");
+
+                    displayTooltip("<b>Artwork: </b>" + d.artwork_name + "<br /><b>Year: </b>" +
+                    d.year)
+        
+                    //d3.select(this).attr("fill", "DarkOrange");
+                })
+                .on("mouseout", function (d) {
+                    d3.selectAll(".colorBlock").attr("stroke", function (d,i) { 
+                        if (d.paint_id == selected_id){return "red" }
+                        else {return "white"}
+                    });
+                    hideTooltip();
+                    //d3.sele
+                })
+
+            //default vis
+            plot_treemap(default_artist['artwork_url'], default_artist['paint_id'], default_artist['artwork_name'], default_artist['year'])
         });
+
 }
