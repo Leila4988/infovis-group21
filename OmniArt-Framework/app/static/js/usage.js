@@ -357,7 +357,7 @@ function plot_usage(colour_name) {
         .append("text")
         .text("percent(%)")
         .style("font-size", "10px")
-        .attr("transform", "translate(" + 30 + ",-5)")
+        .attr("transform", "translate(" + 55 + ",-5)")
         .attr("text-anchor", "end")
         .attr("dy", "1em") 
 
