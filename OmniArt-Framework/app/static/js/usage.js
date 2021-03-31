@@ -224,7 +224,7 @@ function plot_donut() {
         .enter()
         .append("text")
         .attr("class", "legendCount")
-        .attr("x", "40")
+        .attr("x" , "48")
         .attr("y", function (d, i) {
           return y_legend(Math.floor((i + 1) % (number + 1))) + block_height * 4 / 5
         })
