@@ -49,7 +49,7 @@ function plot_year(artist_name, start, end, fullname) {
             yearSvg.append("g")
                 .attr("class", "grid")
                 .attr("id", "year_grid")
-                .attr("transform", "translate(20," + 5 + ")")
+                .attr("transform", "translate(30," + 5 + ")")
                 .call(make_y_year_gridlines()
                     .tickSize(-year_svg_width + 15)
                     .tickFormat("")
@@ -60,7 +60,7 @@ function plot_year(artist_name, start, end, fullname) {
                 .attr("id", "year_group")
                 .attr("width", year_svg_width)
                 .attr("height", year_bar_height)
-                .attr("transform", "translate(" + 0 + "," + 5 + ")");
+                .attr("transform", "translate(" + 10 + "," + 5 + ")");
 
             var year_chart = year_group.append("g")
                 .attr("id", "year_chart")
