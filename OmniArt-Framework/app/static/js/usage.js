@@ -271,7 +271,7 @@ function plot_usage(colour_name) {
         }
       }
 
-      ordered_data = data.sort(compare("count"));
+      ordered_data = data.sort(compare("percent"));
       console.log(ordered_data)
 
       // removeOldDonut
@@ -283,7 +283,7 @@ function plot_usage(colour_name) {
       usageSvg.append("g")
         .attr("class", "grid")
         .attr("id", "usage_grid")
-        .attr("transform", "translate(20," + 20 + ")")
+        .attr("transform", "translate(25," + 20 + ")")
         .call(make_y_usage_gridlines()
           .tickSize(-usage_svg_width + 15)
           .tickFormat("")
@@ -363,13 +363,13 @@ function plot_usage(colour_name) {
       // add the Y Axis
       usage_group.append("g")
         .attr("class", "yAxis")
-        .attr("transform", "translate(" + 25 + ",0)")
+        .attr("transform", "translate(" + 30 + ",0)")
         .call(d3.axisLeft(y_usage).ticks(10))
         .call(g => g.select(".domain").attr('stroke-width', 0))
         .append("text")
         .text("percent(%)")
         .style("font-size", "10px")
-        .attr("transform", "translate(" + 45 + ",-20)")
+        .attr("transform", "translate(" + 48 + ",-20)")
         .attr("text-anchor", "end")
         .attr("dy", "1em")
 
