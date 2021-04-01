@@ -49,7 +49,7 @@ function plot() {
             // add the X grid
             artistSvg.append("g")
                 .attr("class", "grid")
-                .attr("transform", "translate(20," + artist_bar_height + ")")
+                .attr("transform", "translate(30," + artist_bar_height + ")")
                 .call(make_x_gridlines()
                     .tickSize(-year_svg_height)
                     .tickFormat("")
@@ -130,7 +130,7 @@ function plot() {
             // add the Y Axis
             artistSvg.append("g")
                 .attr("class", "yAxis")
-                .attr("transform", "translate(" + 50 + ",0)")
+                .attr("transform", "translate(" + 60 + ",0)")
                 .call(d3.axisLeft(y))
                 .call(g => g.select(".domain").attr('stroke-width', 0));
 

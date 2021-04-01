@@ -224,7 +224,7 @@ function plot_donut() {
         .enter()
         .append("text")
         .attr("class", "legendCount")
-        .attr("x", "40")
+        .attr("x", "55")
         .attr("y", function (d, i) {
           return y_legend(Math.floor((i + 1) % (number + 1))) + block_height * 4 / 5
         })
@@ -262,10 +262,22 @@ function plot_usage(colour_name) {
 
         }
       });
+
+      function compare(p) {
+        return function (m, n) {
+          var a = m[p];
+          var b = n[p];
+          return b - a; //升序
+        }
+      }
+
+      ordered_data = data.sort(compare("count"));
+      console.log(ordered_data)
+
       // removeOldDonut
       // Scale the range of the data in the domains
-      x_usage.domain(data.map(function (d) { return d.artist; }));
-      y_usage.domain([0, d3.max(data, function (d) { return d.percent; })]);
+      x_usage.domain(ordered_data.map(function (d) { return d.artist; }));
+      y_usage.domain([0, d3.max(ordered_data, function (d) { return d.percent; })]);
 
       // add the Y grid
       usageSvg.append("g")
@@ -289,7 +301,7 @@ function plot_usage(colour_name) {
         .attr("transform", "translate(" + 15 + "," + 0 + ")");
 
       usage_chart.selectAll(".usagebar")
-        .data(data)
+        .data(ordered_data)
         .enter()
         .append("rect")
         .attr("class", "usagebar")
@@ -357,9 +369,9 @@ function plot_usage(colour_name) {
         .append("text")
         .text("percent(%)")
         .style("font-size", "10px")
-        .attr("transform", "translate(" + 55 + ",-5)")
+        .attr("transform", "translate(" + 45 + ",-15)")
         .attr("text-anchor", "end")
-        .attr("dy", "1em") 
+        .attr("dy", "1em")
 
 
     });
